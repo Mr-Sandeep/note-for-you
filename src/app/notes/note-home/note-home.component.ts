@@ -21,6 +21,16 @@ export class NoteHomeComponent implements OnInit {
     noteId : 3,
     title : "Third Note",
     desc : "My third note"
+  },
+  {
+    noteId : 4,
+    title : "Second Note",
+    desc : "My second note"
+  },
+  {
+    noteId : 5,
+    title : "Third Note",
+    desc : "My third note"
   }
 ]
   constructor() { }

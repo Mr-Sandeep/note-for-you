@@ -1,16 +1,20 @@
 .header{
-    position: relative;
+    position: sticky;
     z-index: 1000;
+    top: 0px;
+    
 }
 .footer{
     position: relative;
     z-index: 1000;
-    height: 30px;
+    height: 40px;
     background-color: rgb(162, 223, 161);
     font-weight: 600;
+    bottom: 0px;
 }
 .content{
     position: relative;
-    min-height: 400px;
+    min-height: 600px;
     z-index: 999;
+    overflow: auto;
 }

@@ -1,7 +1,7 @@
 <div class="container-fluid">
     <div class="row" >
-        <div *ngFor="let note of notes">
-            <div class="card" style="width: 18rem;">
+        <div class="col-md-3 offset-md-1 mb-3" *ngFor="let note of notes">
+            <div class="card cardAni" style="width: 18rem;">
                 <img src="assets/images/notes.jpg" class="card-img-top" alt="...">
                 <div class="card-body">
                     <h5 class="card-title">{{note.title}}</h5>

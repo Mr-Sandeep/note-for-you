@@ -1,0 +1,6 @@
+.cardAni{
+    transition: transform .2s;
+}
+.cardAni:hover{
+    transform: scale(1.05);
+}
