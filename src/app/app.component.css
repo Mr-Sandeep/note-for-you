@@ -1,0 +1,16 @@
+.header{
+    position: relative;
+    z-index: 1000;
+}
+.footer{
+    position: relative;
+    z-index: 1000;
+    height: 30px;
+    background-color: rgb(162, 223, 161);
+    font-weight: 600;
+}
+.content{
+    position: relative;
+    min-height: 400px;
+    z-index: 999;
+}

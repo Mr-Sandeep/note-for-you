@@ -1,1 +1,14 @@
-<p>note-home works!</p>
+<div class="container-fluid">
+    <div class="row" >
+        <div *ngFor="let note of notes">
+            <div class="card" style="width: 18rem;">
+                <img src="assets/images/notes.jpg" class="card-img-top" alt="...">
+                <div class="card-body">
+                    <h5 class="card-title">{{note.title}}</h5>
+                    <p class="card-text">{{note.desc}}</p>
+                    <a href="#" class="btn btn-primary">Go details</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
