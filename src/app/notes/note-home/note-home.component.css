@@ -4,3 +4,9 @@
 .cardAni:hover{
     transform: scale(1.05);
 }
+.ryt{
+    float: right;
+}
+.lft{
+    float: left;
+}

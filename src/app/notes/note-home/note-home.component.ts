@@ -6,36 +6,22 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./note-home.component.css']
 })
 export class NoteHomeComponent implements OnInit {
-
-  notes =[ {
-    noteId : 1,
-    title : "First Note",
-    desc : "My first note"
-  },
-  {
-    noteId : 2,
-    title : "Second Note",
-    desc : "My second note"
-  },
-  {
-    noteId : 3,
-    title : "Third Note",
-    desc : "My third note"
-  },
-  {
-    noteId : 4,
-    title : "Second Note",
-    desc : "My second note"
-  },
-  {
-    noteId : 5,
-    title : "Third Note",
-    desc : "My third note"
-  }
-]
-  constructor() { }
+  localNotes : any = "";
+  notes : any = [];
+  constructor() { 
+    if(localStorage.getItem('notes') == null){
+      this.localNotes = "";
+    }else{
+      this.localNotes = localStorage.getItem('notes');
+      this.notes = JSON.parse(this.localNotes);
+    }
+   }
 
   ngOnInit(): void {
   }
-
+  deleteNote(index : any){
+    this.notes.splice(index, 1);
+    this.localNotes = JSON.stringify(this.notes);
+    localStorage.setItem('notes', this.localNotes)
+  }
 }

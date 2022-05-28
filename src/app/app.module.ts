@@ -6,6 +6,7 @@ import { AppComponent } from './app.component';
 import { NoteHomeComponent } from './notes/note-home/note-home.component';
 import { NoteCreateComponent } from './notes/note-create/note-create.component';
 import { NoteDetailsComponent } from './notes/note-details/note-details.component';
+import { FormsModule } from '@angular/forms';
 
 @NgModule({
   declarations: [
@@ -16,7 +17,8 @@ import { NoteDetailsComponent } from './notes/note-details/note-details.componen
   ],
   imports: [
     BrowserModule,
-    AppRoutingModule
+    AppRoutingModule,
+    FormsModule
   ],
   providers: [],
   bootstrap: [AppComponent]
