@@ -1,20 +1,53 @@
-<div class="container-fluid">
-    <div class="row" *ngIf="notes.length > 0">
-        <div class="col-md-3 offset-md-1 mb-3" *ngFor="let note of notes, let i = index">
-            <div class="card cardAni" style="width: 18rem;">
-                <img src="assets/images/notes.jpg" class="card-img-top" alt="...">
-                <div class="card-body">
-                    <h5 class="card-title">{{note.title}}</h5>
-                    <p class="card-text">{{note.desc}}</p>
-                    <div>
-                        <!-- <button class="lft btn btn-primary">Go details</button> -->
-                        <button class="ryt btn btn-danger" (click)="deleteNote(i)">Delete</button>
+<div class="container">
+    <div class="row">
+        <div class=" my-3">
+            <button type="button" class="ryt btn btn-primary" (click)="openModal(createNote)">Add</button>
+        </div>
+        <div class="container my-3">
+            <div class="row" *ngIf="notes.length > 0">
+                <div class="col-md-5 col-lg-3 offset-md-1 offset-lg-1 mb-3" *ngFor="let note of notes, let i = index">
+                    <div class="card cardAni" style="width: 18rem;">
+                        <img src="assets/images/notes.jpg" class="card-img-top" alt="...">
+                        <div class="card-body">
+                            <h5 class="card-title">{{note.title}}</h5>
+                            <p class="card-text">{{note.desc}}</p>
+                            <div>
+                                <!-- <button class="lft btn btn-primary">Go details</button> -->
+                                <button class="ryt btn btn-danger" (click)="deleteNote(i)">Delete</button>
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>
+            <div *ngIf="notes.length == 0">
+                No Notes Found.
+            </div>
         </div>
-    </div>
-    <div *ngIf="notes.length == 0">
-        No Notes Found.
+
     </div>
 </div>
+
+<ng-template #createNote>
+    <div class="modal-header">
+       <h4 class="modal-title pull-left">Add Note</h4>
+       <button type="button" class="close pull-right" aria-label="Close" (click)="modalRef.hide()">
+          <span aria-hidden="true">x</span>
+       </button>
+    </div>
+    <div class="modal-body">
+        <form>
+            <div class="mb-3">
+              <label for="title" class="form-label">Title</label>
+              <input type="text" class="form-control" id="title" [(ngModel)]="note.title" name="title">
+            </div>
+            <div class="mb-3">
+                <label for="desc" class="form-label">Description</label>
+                <textarea class="form-control" id="desc" rows="3" name="desc" [(ngModel)]="note.desc" ></textarea>
+              </div>
+          </form>
+    </div>
+    <div class="modal-footer">
+        <button type="submit" class="btn btn-primary" (click)="saveNotes()">Add</button> 
+       <button type="button" class="btn btn-danger" (click)="modalRef.hide()">Cancel</button>
+    </div>
+ </ng-template>

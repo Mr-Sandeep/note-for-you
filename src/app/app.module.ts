@@ -7,6 +7,7 @@ import { NoteHomeComponent } from './notes/note-home/note-home.component';
 import { NoteCreateComponent } from './notes/note-create/note-create.component';
 import { NoteDetailsComponent } from './notes/note-details/note-details.component';
 import { FormsModule } from '@angular/forms';
+import { ModalModule, BsModalService } from 'ngx-bootstrap/modal'
 
 @NgModule({
   declarations: [
@@ -18,9 +19,10 @@ import { FormsModule } from '@angular/forms';
   imports: [
     BrowserModule,
     AppRoutingModule,
-    FormsModule
+    FormsModule,
+    ModalModule
   ],
-  providers: [],
+  providers: [BsModalService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
