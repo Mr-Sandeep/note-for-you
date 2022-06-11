@@ -10,9 +10,9 @@
                         <img src="assets/images/notes.jpg" class="card-img-top" alt="...">
                         <div class="card-body">
                             <h5 class="card-title">{{note.title}}</h5>
-                            <p class="card-text">{{note.desc}}</p>
+                            <p class="card-text">{{note.desc | slice : 0 : 30}}...</p>
                             <div>
-                                <button class="lft btn btn-primary">Go details</button>
+                                <button class="lft btn btn-primary" (click)="openDetailModal(detailNote, note)">Go details</button>
                                 <button class="ryt btn btn-danger" (click)="deleteNote(i)">Delete</button>
                             </div>
                         </div>
@@ -30,8 +30,8 @@
 <ng-template #createNote>
     <div class="modal-header">
        <h4 class="modal-title pull-left">Add Note</h4>
-       <button type="button" class="close pull-right" aria-label="Close" (click)="modalRef.hide()">
-          <span aria-hidden="true">x</span>
+       <button type="button" class="btn btn-dark" aria-label="Close" (click)="modalRef?.hide()">
+          <span aria-hidden="true">X</span>
        </button>
     </div>
     <div class="modal-body">
@@ -48,6 +48,34 @@
     </div>
     <div class="modal-footer">
         <button type="submit" class="btn btn-primary" (click)="saveNotes()">Add</button> 
-       <button type="button" class="btn btn-danger" (click)="modalRef.hide()">Cancel</button>
+       <button type="button" class="btn btn-danger" (click)="modalRef?.hide()">Cancel</button>
+    </div>
+ </ng-template>
+
+
+ <ng-template #detailNote>
+    <div class="modal-header">
+       <h4 class="modal-title pull-left">Note</h4>
+       <button type="button" class="btn btn-dark" aria-label="Close" (click)="modalRef?.hide()">
+          <span aria-hidden="true">X</span>
+       </button>
+    </div>
+    <div class="modal-body">
+        <form>
+            <div class="mb-3">
+              <label for="title" class="form-label"><b>Title:</b></label>
+              <!-- <input type="text" class="form-control" id="title" name="title" > -->
+              <div>{{detailSpecificNote.title}}</div>
+            </div>
+            <div class="mb-3">
+                <label for="desc" class="form-label"><b>Description:</b></label>
+                <!-- <textarea class="form-control" id="desc" rows="3" name="desc" ></textarea> -->
+                <div class="overflowCont">{{detailSpecificNote.desc}}</div>
+              </div>
+          </form>
+    </div>
+    <div class="modal-footer">
+        <!-- <button type="submit" class="btn btn-primary" (click)="saveNotes()">Add</button>  -->
+       <button type="button" class="btn btn-danger" (click)="modalRef?.hide()">Cancel</button>
     </div>
  </ng-template>

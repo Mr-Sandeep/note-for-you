@@ -1,6 +1,5 @@
 import { Component, OnInit, TemplateRef } from '@angular/core';
-import { BsModalRef, BsModalService } from 'ngx-bootstrap/modal';
-
+import { BsModalRef, BsModalService, ModalOptions } from 'ngx-bootstrap/modal';
 @Component({
   selector: 'app-note-home',
   templateUrl: './note-home.component.html',
@@ -9,13 +8,13 @@ import { BsModalRef, BsModalService } from 'ngx-bootstrap/modal';
 export class NoteHomeComponent implements OnInit {
   localNotes : any = "";
   notes : any = [];
-  modalRef!: BsModalRef;
+  modalRef?: BsModalRef;
   note : any ={
     title : '',
     desc : ''
   }
-  
-
+  title = {title : "title of modal"}
+  detailSpecificNote : any;
   constructor(private modalServ : BsModalService) { 
     if(localStorage.getItem('notes') == null){
       this.localNotes = "";
@@ -48,6 +47,14 @@ export class NoteHomeComponent implements OnInit {
     this.notes.push(this.note);
     this.localNotes = JSON.stringify(this.notes);
     localStorage.setItem('notes', this.localNotes);
-    this.modalRef.hide();
+    this.modalRef?.hide();
+  }
+
+  openDetailModal(template : TemplateRef<any>, specifiedNote : any){
+    console.log(specifiedNote);
+    this.detailSpecificNote = specifiedNote;
+    console.log(this.detailSpecificNote)
+    this.modalRef = this.modalServ.show(template)
+    
   }
 }

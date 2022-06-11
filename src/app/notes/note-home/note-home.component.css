@@ -13,3 +13,7 @@
 .arwDefault{
     cursor: default;
 }
+.overflowCont{
+    overflow-y: auto;
+    height: 150px;
+}
