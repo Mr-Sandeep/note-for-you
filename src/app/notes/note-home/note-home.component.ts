@@ -13,7 +13,10 @@ export class NoteHomeComponent implements OnInit {
     title : '',
     desc : ''
   }
-  title = {title : "title of modal"}
+  newNote : any = {
+    title : '',
+    desc : ''
+  }
   detailSpecificNote : any;
   editSpecificNote : any;
   constructor(private modalServ : BsModalService) { 
@@ -35,20 +38,21 @@ export class NoteHomeComponent implements OnInit {
   }
 
   openModal(template : TemplateRef<any>){
-    this.note.desc = "";
-    this.note.title = "";
     this.modalRef = this.modalServ.show(template, {
       animated: true
     });
   }
 
   saveNotes(){
-    this.note.noteId = new Date().getMilliseconds()
-    console.log("Save notes", this.note);
-    this.notes.push(this.note);
+    this.newNote.noteId = new Date().getMilliseconds();
+    this.notes.push(this.newNote);
     this.localNotes = JSON.stringify(this.notes);
     localStorage.setItem('notes', this.localNotes);
     this.modalRef?.hide();
+    this.newNote = {
+      title : '',
+      desc : ''
+    }
   }
 
   openDetailModal(template : TemplateRef<any>, specifiedNote : any){
