@@ -15,6 +15,7 @@ export class NoteHomeComponent implements OnInit {
   }
   title = {title : "title of modal"}
   detailSpecificNote : any;
+  editSpecificNote : any;
   constructor(private modalServ : BsModalService) { 
     if(localStorage.getItem('notes') == null){
       this.localNotes = "";
@@ -51,10 +52,45 @@ export class NoteHomeComponent implements OnInit {
   }
 
   openDetailModal(template : TemplateRef<any>, specifiedNote : any){
-    console.log(specifiedNote);
     this.detailSpecificNote = specifiedNote;
-    console.log(this.detailSpecificNote)
+    this.modalRef = this.modalServ.show(template);
+  }
+
+  editNoteModal(template : TemplateRef<any>, specifiedEditNote : any){
+    this.detailSpecificNote = '';
+    this.modalRef?.hide();
+    this.editSpecificNote = JSON.parse(JSON.stringify(specifiedEditNote));
     this.modalRef = this.modalServ.show(template)
     
+  }
+
+  saveEditNotes(editNote:any){
+    console.log(editNote);
+    let editLocalNotes : any = "";
+    if(localStorage.getItem('notes') == null){
+      editLocalNotes = "";
+    }else{
+      editLocalNotes = localStorage.getItem('notes');
+      editLocalNotes = JSON.parse(editLocalNotes);
+    }
+
+    editLocalNotes.forEach((noteEle: any) => {
+      if(noteEle.noteId == editNote.noteId){
+        noteEle.title = editNote.title;
+        noteEle.desc = editNote.desc;
+      }
+    });
+    
+    let stringifyEditLocalNotes = JSON.stringify(editLocalNotes)
+    localStorage.setItem('notes', stringifyEditLocalNotes);
+
+    if(localStorage.getItem('notes') == null){
+      this.localNotes = "";
+    }else{
+      this.localNotes = localStorage.getItem('notes');
+      this.notes = JSON.parse(this.localNotes);
+    }
+
+    this.modalRef?.hide();
   }
 }

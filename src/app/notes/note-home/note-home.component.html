@@ -75,7 +75,32 @@
           </form>
     </div>
     <div class="modal-footer">
-        <!-- <button type="submit" class="btn btn-primary" (click)="saveNotes()">Add</button>  -->
+        <button type="submit" class="btn btn-primary" (click)="editNoteModal(editNote, detailSpecificNote)">Edit</button> 
+       <button type="button" class="btn btn-danger" (click)="modalRef?.hide()">Cancel</button>
+    </div>
+ </ng-template>
+
+ <ng-template #editNote>
+    <div class="modal-header">
+       <h4 class="modal-title pull-left">Note</h4>
+       <button type="button" class="btn btn-dark" aria-label="Close" (click)="modalRef?.hide()">
+          <span aria-hidden="true">X</span>
+       </button>
+    </div>
+    <div class="modal-body">
+        <form>
+            <div class="mb-3">
+              <label for="title" class="form-label"><b>Title:</b></label>
+              <input type="text" class="form-control" id="title" [(ngModel)]="editSpecificNote.title" name="title">
+            </div>
+            <div class="mb-3">
+                <label for="desc" class="form-label"><b>Description:</b></label>
+                <textarea class="form-control" id="desc" rows="3" name="desc" [(ngModel)]="editSpecificNote.desc"></textarea>
+              </div>
+          </form>
+    </div>
+    <div class="modal-footer">
+        <button type="submit" class="btn btn-primary" (click)="saveEditNotes(editSpecificNote)">Save</button> 
        <button type="button" class="btn btn-danger" (click)="modalRef?.hide()">Cancel</button>
     </div>
  </ng-template>
