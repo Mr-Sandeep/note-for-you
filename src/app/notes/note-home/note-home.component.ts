@@ -1,5 +1,6 @@
 import { Component, OnInit, TemplateRef } from '@angular/core';
 import { BsModalRef, BsModalService, ModalOptions } from 'ngx-bootstrap/modal';
+import { ServicesService } from 'src/app/service/services.service';
 @Component({
   selector: 'app-note-home',
   templateUrl: './note-home.component.html',
@@ -13,22 +14,27 @@ export class NoteHomeComponent implements OnInit {
     title : '',
     desc : ''
   }
-  newNote : any = {
-    title : '',
-    desc : ''
-  }
+  newNote : any = {}
   detailSpecificNote : any;
   editSpecificNote : any;
-  constructor(private modalServ : BsModalService) { 
-    if(localStorage.getItem('notes') == null){
-      this.localNotes = "";
-    }else{
-      this.localNotes = localStorage.getItem('notes');
-      this.notes = JSON.parse(this.localNotes);
-    }
+  constructor(private modalServ : BsModalService, private service : ServicesService) { 
+    // if(localStorage.getItem('notes') == null){
+    //   this.localNotes = "";
+    // }else{
+    //   this.localNotes = localStorage.getItem('notes');
+    //   this.notes = JSON.parse(this.localNotes);
+    // }
+   
    }
 
   ngOnInit(): void {
+    // this.service.showSpinner();
+    // this.service.getNotes().subscribe((res:any)=>{
+    //   if(res.data){
+    //     this.notes = res.data;
+    //     this.service.hideSpinner();
+    //   }
+    // });
   }
 
   deleteNote(index : any){
@@ -44,15 +50,27 @@ export class NoteHomeComponent implements OnInit {
   }
 
   saveNotes(){
-    this.newNote.noteId = new Date().getMilliseconds();
-    this.notes.push(this.newNote);
-    this.localNotes = JSON.stringify(this.notes);
-    localStorage.setItem('notes', this.localNotes);
+    // this.newNote.noteId = new Date().getMilliseconds();
+    // this.notes.push(this.newNote);
+    console.log(this.newNote);
+    this.service.showSpinner();
+    this.service.saveNotes(this.newNote).subscribe((resp:any) => {
+      if(resp.status == 'SUCCESS'){
+        this.newNote = {};
+        this.service.hideSpinner();
+        alert("Note saved successfully");
+        window.location.reload();
+      }else if(resp.status == 'FAILED'){
+        this.service.hideSpinner();
+        alert("Note not saved. Please contact to support team.");
+        this.newNote = {};
+      }
+    });
+    // this.localNotes = JSON.stringify(this.notes);
+    // localStorage.setItem('notes', this.localNotes);
+    
     this.modalRef?.hide();
-    this.newNote = {
-      title : '',
-      desc : ''
-    }
+  
   }
 
   openDetailModal(template : TemplateRef<any>, specifiedNote : any){

@@ -9,8 +9,8 @@
                     <div class="card cardAni" style="width: 18rem;">
                         <img src="assets/images/notes.jpg" class="card-img-top" alt="...">
                         <div class="card-body">
-                            <h5 class="card-title">{{note.title}}</h5>
-                            <p class="card-text">{{note.desc | slice : 0 : 30}}...</p>
+                            <h5 class="card-title">{{note.noteTitle}}</h5>
+                            <p class="card-text">{{note.noteDesc | slice : 0 : 30}}...</p>
                             <div>
                                 <button class="lft btn btn-primary" (click)="openDetailModal(detailNote, note)">Go details</button>
                                 <button class="ryt btn btn-danger" (click)="deleteNote(i)">Delete</button>
@@ -38,11 +38,11 @@
         <form>
             <div class="mb-3">
               <label for="title" class="form-label">Title</label>
-              <input type="text" class="form-control" id="title" [(ngModel)]="newNote.title" name="title">
+              <input type="text" class="form-control" id="title" [(ngModel)]="newNote.noteTitle" name="title">
             </div>
             <div class="mb-3">
                 <label for="desc" class="form-label">Description</label>
-                <textarea class="form-control" id="desc" rows="3" name="desc" [(ngModel)]="newNote.desc" ></textarea>
+                <textarea class="form-control" id="desc" rows="3" name="desc" [(ngModel)]="newNote.noteDesc" ></textarea>
               </div>
           </form>
     </div>
@@ -65,12 +65,12 @@
             <div class="mb-3">
               <label for="title" class="form-label"><b>Title:</b></label>
               <!-- <input type="text" class="form-control" id="title" name="title" > -->
-              <div>{{detailSpecificNote.title}}</div>
+              <div>{{detailSpecificNote.noteTitle}}</div>
             </div>
             <div class="mb-3">
                 <label for="desc" class="form-label"><b>Description:</b></label>
                 <!-- <textarea class="form-control" id="desc" rows="3" name="desc" ></textarea> -->
-                <div class="overflowCont">{{detailSpecificNote.desc}}</div>
+                <div class="overflowCont">{{detailSpecificNote.noteDesc}}</div>
               </div>
           </form>
     </div>
@@ -91,11 +91,11 @@
         <form>
             <div class="mb-3">
               <label for="title" class="form-label"><b>Title:</b></label>
-              <input type="text" class="form-control" id="title" [(ngModel)]="editSpecificNote.title" name="title">
+              <input type="text" class="form-control" id="title" [(ngModel)]="editSpecificNote.noteTitle" name="title">
             </div>
             <div class="mb-3">
                 <label for="desc" class="form-label"><b>Description:</b></label>
-                <textarea class="form-control" id="desc" rows="3" name="desc" [(ngModel)]="editSpecificNote.desc"></textarea>
+                <textarea class="form-control" id="desc" rows="3" name="desc" [(ngModel)]="editSpecificNote.noteDesc"></textarea>
               </div>
           </form>
     </div>
