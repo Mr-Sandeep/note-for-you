@@ -1,0 +1,22 @@
+.register{
+    margin-top: 50px; 
+    padding: 10px;
+    display: flex;
+    justify-content: center;
+}
+.rowRegister{
+    display: flex;
+    justify-content: center;
+}
+
+.subAlign{
+    position: absolute;
+    right: 12px;
+    bottom: 12px;
+}
+
+.layRegister{
+    width: 100%;
+    padding: 5px;
+    height: 115%;
+}

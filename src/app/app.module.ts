@@ -1,6 +1,6 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
-import { HttpClientModule } from '@angular/common/http'
+import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http'
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
@@ -13,6 +13,7 @@ import { ServicesService } from './service/services.service';
 import { NgxSpinnerModule } from 'ngx-spinner';
 import { LoginComponent } from './notes/login/login/login.component';
 import { RegisterComponent } from './notes/register/register/register.component';
+import { AuthInterceptor } from './auth/auth.interceptor';
 
 @NgModule({
   declarations: [
@@ -33,7 +34,13 @@ import { RegisterComponent } from './notes/register/register/register.component'
     BrowserAnimationsModule,
     ReactiveFormsModule
   ],
-  providers: [BsModalService, ServicesService],
+  providers: [BsModalService, ServicesService,
+  {
+    provide: HTTP_INTERCEPTORS,
+    useClass: AuthInterceptor,
+    multi: true
+  }
+],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

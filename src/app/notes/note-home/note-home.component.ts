@@ -28,13 +28,13 @@ export class NoteHomeComponent implements OnInit {
    }
 
   ngOnInit(): void {
-    // this.service.showSpinner();
-    // this.service.getNotes().subscribe((res:any)=>{
-    //   if(res.data){
-    //     this.notes = res.data;
-    //     this.service.hideSpinner();
-    //   }
-    // });
+    this.service.showSpinner();
+    this.service.getNotes().subscribe((res:any)=>{
+      if(res.data){
+        this.notes = res.data;
+        this.service.hideSpinner();
+      }
+    });
   }
 
   deleteNote(index : any){
