@@ -8,9 +8,10 @@
     position: relative;
     z-index: 1000;
     height: 40px;
-    background-color: rgb(162, 223, 161);
+    background-color: inherit;
     font-weight: 600;
     bottom: 0px;
+    border-top: 2px solid;
 }
 .content{
     position: relative;

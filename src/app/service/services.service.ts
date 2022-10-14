@@ -28,6 +28,14 @@ export class ServicesService {
   loggedIn(postData:any){
     return this.http.post<any>("http://localhost:3000/login", postData);
   }
+
+  deleteNote(data:any){
+    console.log("service delete-->", data);
+    return this.http.post<any>("http://localhost:3000/deleteNote", data);
+  }
+  saveEditNote(note:any){
+    return this.http.post<any>('http://localhost:3000/editNote', note);
+  }
   showSpinner(): void {
     this.spinner.show();
   }

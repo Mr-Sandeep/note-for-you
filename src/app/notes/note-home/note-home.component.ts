@@ -18,29 +18,40 @@ export class NoteHomeComponent implements OnInit {
   detailSpecificNote : any;
   editSpecificNote : any;
   constructor(private modalServ : BsModalService, private service : ServicesService) { 
-    // if(localStorage.getItem('notes') == null){
-    //   this.localNotes = "";
-    // }else{
-    //   this.localNotes = localStorage.getItem('notes');
-    //   this.notes = JSON.parse(this.localNotes);
-    // }
-   
    }
 
   ngOnInit(): void {
     this.service.showSpinner();
     this.service.getNotes().subscribe((res:any)=>{
       if(res.data){
-        this.notes = res.data;
+        this.notes = res.data.notesArr;
         this.service.hideSpinner();
       }
     });
   }
 
-  deleteNote(index : any){
-    this.notes.splice(index, 1);
-    this.localNotes = JSON.stringify(this.notes);
-    localStorage.setItem('notes', this.localNotes)
+  deleteNote(noteTitle : any){
+    // this.notes.splice(index, 1);
+    // this.localNotes = JSON.stringify(this.notes);
+    // localStorage.setItem('notes', this.localNotes)
+    // console.log(noteTitle);
+    let title = {
+      noteTitle: noteTitle
+    }
+    console.log(title);
+    
+    this.service.showSpinner();
+    this.service.deleteNote(title).subscribe((resp:any)=>{
+      if(resp.status == "SUCCESS"){
+        this.service.hideSpinner();
+        alert(resp.msg);
+        window.location.reload();
+      }else if(resp.status == "FAILED"){
+        this.service.hideSpinner()
+        alert(resp.msg);
+      }
+    });
+
   }
 
   openModal(template : TemplateRef<any>){
@@ -88,31 +99,19 @@ export class NoteHomeComponent implements OnInit {
 
   saveEditNotes(editNote:any){
     console.log(editNote);
-    let editLocalNotes : any = "";
-    if(localStorage.getItem('notes') == null){
-      editLocalNotes = "";
-    }else{
-      editLocalNotes = localStorage.getItem('notes');
-      editLocalNotes = JSON.parse(editLocalNotes);
-    }
-
-    editLocalNotes.forEach((noteEle: any) => {
-      if(noteEle.noteId == editNote.noteId){
-        noteEle.title = editNote.title;
-        noteEle.desc = editNote.desc;
+    this.service.showSpinner();
+    this.service.saveEditNote(editNote).subscribe((resp:any)=>{
+      if(resp.status == 'SUCCESS'){
+        this.service.hideSpinner();
+        alert(resp.msg);
+        this.modalRef?.hide();
+        window.location.reload();
+      }else if(resp.status == 'FAILED'){
+        this.service.hideSpinner();
+        alert(resp.msg);
+        this.modalRef?.hide();
       }
     });
     
-    let stringifyEditLocalNotes = JSON.stringify(editLocalNotes)
-    localStorage.setItem('notes', stringifyEditLocalNotes);
-
-    if(localStorage.getItem('notes') == null){
-      this.localNotes = "";
-    }else{
-      this.localNotes = localStorage.getItem('notes');
-      this.notes = JSON.parse(this.localNotes);
-    }
-
-    this.modalRef?.hide();
   }
 }

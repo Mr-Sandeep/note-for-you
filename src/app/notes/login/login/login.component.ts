@@ -30,7 +30,7 @@ export class LoginComponent implements OnInit {
         this.serv.hideSpinner();
         this.serv.loggedUser.check = true;
         this.serv.loggedUser.token = result.auth;
-        localStorage.setItem('x-auth-token', result.auth);
+        sessionStorage.setItem('x-auth-token-note', result.auth);
         alert("Logged in successfully.");
         this.router.navigate(['/home']);
       }else{

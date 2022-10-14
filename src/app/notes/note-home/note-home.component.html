@@ -13,7 +13,7 @@
                             <p class="card-text">{{note.noteDesc | slice : 0 : 30}}...</p>
                             <div>
                                 <button class="lft btn btn-primary" (click)="openDetailModal(detailNote, note)">Go details</button>
-                                <button class="ryt btn btn-danger" (click)="deleteNote(i)">Delete</button>
+                                <button class="ryt btn btn-danger" (click)="deleteNote(note.noteTitle)">Delete</button>
                             </div>
                         </div>
                     </div>
