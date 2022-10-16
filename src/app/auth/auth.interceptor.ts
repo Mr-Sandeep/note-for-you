@@ -14,13 +14,10 @@ export class AuthInterceptor implements HttpInterceptor {
     
     intercept(req: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
         if(this.authGuard.authToken != null){
-            var modifiedReq = req.clone({
+            const modifiedReq = req.clone({
                 headers: req.headers.append('x-auth-token', this.authGuard.authToken)
             });
             
-            modifiedReq = req.clone({
-                headers: req.headers.append('Access-Control-Allow-Origin', '*')
-            });
             return next.handle(modifiedReq).pipe(
                 catchError((error)=>{
                     console.log('error is intercept');
