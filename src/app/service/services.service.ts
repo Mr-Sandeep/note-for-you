@@ -14,27 +14,27 @@ export class ServicesService {
    }
 
   getNotes() {
-    return this.http.get<any>('http://localhost:3000/getNotes')
+    return this.http.get<any>('https://yournoteapplication.herokuapp.com/getNotes')
   }
 
   saveNotes(note: any) {
-    return this.http.put<any>("http://localhost:3000/savedNotes", note)
+    return this.http.put<any>("https://yournoteapplication.herokuapp.com/savedNotes", note)
   }
 
   registration(postData: any){
-    return this.http.post<any>("http://localhost:3000/registerUser", postData);
+    return this.http.post<any>("https://yournoteapplication.herokuapp.com/registerUser", postData);
   }
  
   loggedIn(postData:any){
-    return this.http.post<any>("http://localhost:3000/login", postData);
+    return this.http.post<any>("https://yournoteapplication.herokuapp.com/login", postData);
   }
 
   deleteNote(data:any){
     console.log("service delete-->", data);
-    return this.http.post<any>("http://localhost:3000/deleteNote", data);
+    return this.http.post<any>("https://yournoteapplication.herokuapp.com/deleteNote", data);
   }
   saveEditNote(note:any){
-    return this.http.post<any>('http://localhost:3000/editNote', note);
+    return this.http.post<any>('https://yournoteapplication.herokuapp.com/editNote', note);
   }
   showSpinner(): void {
     this.spinner.show();
