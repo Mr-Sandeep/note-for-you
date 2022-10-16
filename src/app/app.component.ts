@@ -7,7 +7,7 @@ import { ServicesService } from './service/services.service';
   styleUrls: ['./app.component.css']
 })
 export class AppComponent {
-  title = 'toDo';
+  title = 'notesforyou';
   loginCheck = false;
   constructor(private serv: ServicesService){
     this.loginCheck = this.serv.loggedUser.check
