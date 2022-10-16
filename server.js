@@ -3,7 +3,7 @@ const path = require('path');
 const app = express();
 const cors = require('cors')
 
-app.use(cors({origin: true}));
+app.use(cors());
 app.use(express.static(__dirname + '/dist/notesforyou'));
 app.get('/*', function(req,res)
 
