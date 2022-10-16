@@ -26,6 +26,10 @@ export class AuthInterceptor implements HttpInterceptor {
                         this.router.navigate(['/login']);
                         this.serv.hideSpinner();
                         sessionStorage.setItem('x-auth-token-note', ''); 
+                    }else if(error.status == 400 && error.statusText == "Bad Request"){
+                        this.router.navigate(['/login']);
+                        this.serv.hideSpinner();
+                        sessionStorage.setItem('x-auth-token-note', '');
                     }else{
                         this.serv.hideSpinner();
                         alert(error.statusText +". "+ "Try after sometime.");

@@ -10,31 +10,59 @@ export class ServicesService {
     token: '',
     check: false 
   };
+
+  prod = "https://yournoteapplication.herokuapp.com";
+  local = "http://localhost:3000";
+  env = true;
   constructor(private http: HttpClient, private spinner: NgxSpinnerService) { 
    }
 
   getNotes() {
-    return this.http.get<any>('https://yournoteapplication.herokuapp.com/getNotes')
+    if(this.env){
+      return this.http.get<any>(this.prod+'/getNotes')
+    }else{
+      return this.http.get<any>(this.local+'/getNotes')
+    }
+    
   }
 
   saveNotes(note: any) {
-    return this.http.put<any>("https://yournoteapplication.herokuapp.com/savedNotes", note)
+    if(this.env){
+      return this.http.put<any>(this.prod+'/savedNotes', note)
+    }else{
+      return this.http.put<any>(this.local+'/savedNotes', note)
+    }
   }
 
   registration(postData: any){
-    return this.http.post<any>("https://yournoteapplication.herokuapp.com/registerUser", postData);
+    if(this.env){
+      return this.http.post<any>(this.prod+'/registerUser', postData)
+    }else{
+      return this.http.post<any>(this.local+'/registerUser', postData)
+    }
   }
  
   loggedIn(postData:any){
-    return this.http.post<any>("https://yournoteapplication.herokuapp.com/login", postData);
+    if(this.env){
+      return this.http.post<any>(this.prod+'/login', postData)
+    }else{
+      return this.http.post<any>(this.local+'/login', postData)
+    }
   }
 
   deleteNote(data:any){
-    console.log("service delete-->", data);
-    return this.http.post<any>("https://yournoteapplication.herokuapp.com/deleteNote", data);
+    if(this.env){
+      return this.http.post<any>(this.prod+'/deleteNote', data)
+    }else{
+      return this.http.post<any>(this.local+'/deleteNote', data)
+    }
   }
   saveEditNote(note:any){
-    return this.http.post<any>('https://yournoteapplication.herokuapp.com/editNote', note);
+    if(this.env){
+      return this.http.post<any>(this.prod+'/editNote', note)
+    }else{
+      return this.http.post<any>(this.local+'/editNote', note)
+    }
   }
   showSpinner(): void {
     this.spinner.show();
