@@ -17,10 +17,6 @@ export class AuthInterceptor implements HttpInterceptor {
             var modifiedReq = req.clone({
                 headers: req.headers.append('x-auth-token', this.authGuard.authToken)
             });
-
-            modifiedReq = req.clone({
-                headers: req.headers.append('Access-Control-Allow-Origin', '*')
-            });
             
             return next.handle(modifiedReq).pipe(
                 catchError((error)=>{
