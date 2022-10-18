@@ -33,7 +33,7 @@ export class AuthInterceptor implements HttpInterceptor {
                     }else{
                         this.serv.hideSpinner();
                         alert(error.statusText +". "+ "Try after sometime.");
-                        window.location.reload();
+                        // window.location.reload();
                     }
                     return throwError(error.message);
                 })

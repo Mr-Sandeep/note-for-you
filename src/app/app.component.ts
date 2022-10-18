@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { Router } from '@angular/router';
 import { ServicesService } from './service/services.service';
 
 @Component({
@@ -9,7 +10,7 @@ import { ServicesService } from './service/services.service';
 export class AppComponent {
   title = 'notesforyou';
   loginCheck = false;
-  constructor(private serv: ServicesService){
+  constructor(private serv: ServicesService, private router: Router){
     this.loginCheck = this.serv.loggedUser.check
   }
 
@@ -21,6 +22,7 @@ export class AppComponent {
     console.log("logout");
     sessionStorage.setItem('x-auth-token-note', '');
     this.loginCheck = true;
-    window.location.reload();
+    // window.location.reload();
+    this.router.navigate(['/login']);
   }
 }

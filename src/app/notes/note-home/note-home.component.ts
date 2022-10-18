@@ -1,4 +1,5 @@
 import { Component, OnInit, TemplateRef } from '@angular/core';
+import { Router } from '@angular/router';
 import { BsModalRef, BsModalService, ModalOptions } from 'ngx-bootstrap/modal';
 import { ServicesService } from 'src/app/service/services.service';
 @Component({
@@ -17,10 +18,14 @@ export class NoteHomeComponent implements OnInit {
   newNote : any = {}
   detailSpecificNote : any;
   editSpecificNote : any;
-  constructor(private modalServ : BsModalService, private service : ServicesService) { 
+  constructor(private modalServ : BsModalService, private service : ServicesService, private router: Router) { 
    }
 
   ngOnInit(): void {
+    this.getAllNotes();
+  }
+
+  getAllNotes(){
     this.service.showSpinner();
     this.service.getNotes().subscribe((res:any)=>{
       if(res.data){
@@ -45,7 +50,8 @@ export class NoteHomeComponent implements OnInit {
       if(resp.status == "SUCCESS"){
         this.service.hideSpinner();
         alert(resp.msg);
-        window.location.reload();
+        // window.location.reload();
+        this.getAllNotes();
       }else if(resp.status == "FAILED"){
         this.service.hideSpinner()
         alert(resp.msg);
@@ -70,7 +76,8 @@ export class NoteHomeComponent implements OnInit {
         this.newNote = {};
         this.service.hideSpinner();
         alert("Note saved successfully");
-        window.location.reload();
+        // window.location.reload();
+        this.getAllNotes();
       }else if(resp.status == 'FAILED'){
         this.service.hideSpinner();
         alert("Note not saved. Please contact to support team.");
@@ -105,7 +112,8 @@ export class NoteHomeComponent implements OnInit {
         this.service.hideSpinner();
         alert(resp.msg);
         this.modalRef?.hide();
-        window.location.reload();
+        // window.location.reload();
+        this.getAllNotes();
       }else if(resp.status == 'FAILED'){
         this.service.hideSpinner();
         alert(resp.msg);
