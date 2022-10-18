@@ -21,7 +21,7 @@ export class AppComponent {
   logout(){
     console.log("logout");
     sessionStorage.setItem('x-auth-token-note', '');
-    this.loginCheck = true;
+    this.loginCheck = false;
     // window.location.reload();
     this.router.navigate(['/login']);
   }
