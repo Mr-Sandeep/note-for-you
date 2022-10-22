@@ -15,13 +15,13 @@ export class AppComponent {
   }
 
   ngDoCheck(){
-    this.loginCheck = this.serv.loggedUser.check
+    this.loginCheck = this.serv.loggedUser.check;
   }
 
   logout(){
     console.log("logout");
     sessionStorage.setItem('x-auth-token-note', '');
-    this.loginCheck = false;
+    this.serv.loggedUser.check = false;
     // window.location.reload();
     this.router.navigate(['/login']);
   }
