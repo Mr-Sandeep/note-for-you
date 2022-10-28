@@ -23,6 +23,8 @@ export class AuthInterceptor implements HttpInterceptor {
                     console.log('error is intercept');
                     console.error(error)
                     if(error.status == 401 && error.statusText == "Unauthorized"){
+                        alert("Session expired, please login again.");
+                        this.serv.loggedUser.check = false;
                         this.router.navigate(['/login']);
                         this.serv.hideSpinner();
                         sessionStorage.setItem('x-auth-token-note', ''); 
