@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { UntypedFormBuilder, UntypedFormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { ServicesService } from 'src/app/service/services.service';
 
@@ -11,9 +11,9 @@ import { ServicesService } from 'src/app/service/services.service';
 })
 export class RegisterComponent implements OnInit {
 
-  registerForm!: FormGroup;
+  registerForm!: UntypedFormGroup;
   submitted: Boolean = false;
-  constructor(private formBuilder: FormBuilder, private serv: ServicesService, private router: Router) { }
+  constructor(private formBuilder: UntypedFormBuilder, private serv: ServicesService, private router: Router) { }
 
   ngOnInit(): void {
     this.registerForm = this.formBuilder.group({
